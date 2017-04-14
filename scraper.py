@@ -3,6 +3,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, DateTime, Float, Boolean
 from sqlalchemy.orm import sessionmaker
+
 from dateutil.parser import parse
 from util import post_listing_to_slack, find_points_of_interest
 from slackclient import SlackClient
@@ -46,7 +47,12 @@ def scrape_area(area):
     :return: A list of results.
     """
     cl_h = CraigslistHousing(site=settings.CRAIGSLIST_SITE, area=area, category=settings.CRAIGSLIST_HOUSING_SECTION,
-                             filters={'max_price': settings.MAX_PRICE, "min_price": settings.MIN_PRICE, 'bedrooms': settings.BEDROOMS, "bathrooms": settings.BATHROOMS})
+                             filters={'max_price': settings.MAX_PRICE,
+                                      "min_price": settings.MIN_PRICE,
+                                      'bedrooms': settings.BEDROOMS,
+                                      'min_ft2': settings.MIN_FT2,
+                                      "bathrooms": settings.BATHROOMS
+                                      })
 
     results = []
     gen = cl_h.get_results(sort_by='newest', geotagged=True, limit=20)
