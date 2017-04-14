@@ -24,6 +24,9 @@ AREAS = ['sfc']
 #The minimum number of bedrooms in a result
 BEDROOMS = 2
 
+#minimum bathrooms
+BATHROOMS = 2
+
 # A list of neighborhoods and coordinates that you want to look for apartments in.  Any listing that has coordinates
 # attached will be checked to see which area it is in.  If there's a match, it will be annotated with the area
 # name.  If no match, the neighborhood field, which is a string, will be checked to see if it matches
